@@ -54,6 +54,148 @@ public abstract class JOParserContract
     Assert.assertTrue(eof.get());
   }
 
+  @Test public final void testS_0()
+    throws Exception
+  {
+    final AtomicBoolean s_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandS(
+        final LexicalPositionType<Path> p,
+        final int group_number)
+      {
+        Assert.assertEquals(23L, (long) group_number);
+        s_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("s_0.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(s_called.get());
+  }
+
+  @Test public final void testS_1()
+    throws Exception
+  {
+    final AtomicBoolean s_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandS(
+        final LexicalPositionType<Path> p,
+        final int group_number)
+      {
+        Assert.assertEquals(0L, (long) group_number);
+        s_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("s_1.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(s_called.get());
+  }
+
+  @Test public final void testSBad_0()
+    throws Exception
+  {
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("s_bad_0.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testSBad_1()
+    throws Exception
+  {
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("s_bad_1.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
   @Test public final void testO()
     throws Exception
   {
@@ -87,6 +229,148 @@ public abstract class JOParserContract
 
     Assert.assertTrue(eof.get());
     Assert.assertTrue(o_called.get());
+  }
+
+  @Test public final void testUsemtl()
+    throws Exception
+  {
+    final AtomicBoolean m_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandUsemtl(
+        final LexicalPositionType<Path> p,
+        final String name)
+      {
+        Assert.assertEquals("Material", name);
+        m_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("usemtl.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(m_called.get());
+  }
+
+  @Test public final void testMtllib()
+    throws Exception
+  {
+    final AtomicBoolean m_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandMtllib(
+        final LexicalPositionType<Path> p,
+        final String name)
+      {
+        Assert.assertEquals("file.mtl", name);
+        m_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("mtllib.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(m_called.get());
+  }
+
+  @Test public final void testMtllibBad()
+    throws Exception
+  {
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("mtllib_bad.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testUsemtlBad()
+    throws Exception
+  {
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("usemtl_bad.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
   }
 
   @Test public final void testOBad()

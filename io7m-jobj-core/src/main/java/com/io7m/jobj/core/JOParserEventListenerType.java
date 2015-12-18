@@ -85,6 +85,28 @@ public interface JOParserEventListenerType
     String text);
 
   /**
+   * A {@code usemtl} command was encountered.
+   *
+   * @param p    The lexical position
+   * @param name The material name
+   */
+
+  void onCommandUsemtl(
+    LexicalPositionType<Path> p,
+    String name);
+
+  /**
+   * An {@code mtllib} command was encountered.
+   *
+   * @param p    The lexical position
+   * @param name The material file name
+   */
+
+  void onCommandMtllib(
+    LexicalPositionType<Path> p,
+    String name);
+
+  /**
    * An {@code o} command was encountered.
    *
    * @param p    The lexical position
@@ -94,6 +116,17 @@ public interface JOParserEventListenerType
   void onCommandO(
     LexicalPositionType<Path> p,
     String name);
+
+  /**
+   * An {@code s} command was encountered.
+   *
+   * @param p            The lexical position
+   * @param group_number The group number
+   */
+
+  void onCommandS(
+    LexicalPositionType<Path> p,
+    int group_number);
 
   /**
    * A {@code v} command was encountered.

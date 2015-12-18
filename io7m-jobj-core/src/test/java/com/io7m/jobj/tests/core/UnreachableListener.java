@@ -67,9 +67,30 @@ public class UnreachableListener implements JOParserEventListenerType
     throw new UnreachableCodeException();
   }
 
+  @Override public void onCommandUsemtl(
+    final LexicalPositionType<Path> p,
+    final String name)
+  {
+    throw new UnreachableCodeException();
+  }
+
+  @Override public void onCommandMtllib(
+    final LexicalPositionType<Path> p,
+    final String name)
+  {
+    throw new UnreachableCodeException();
+  }
+
   @Override public void onCommandO(
     final LexicalPositionType<Path> p,
     final String name)
+  {
+    throw new UnreachableCodeException();
+  }
+
+  @Override public void onCommandS(
+    final LexicalPositionType<Path> p,
+    final int group_number)
   {
     throw new UnreachableCodeException();
   }
