@@ -11,11 +11,13 @@
   <body>
     <subsection name="${project.name}">
       <p>
-        The <b>${project.name}</b> package...
+        The <b>${project.name}</b> package implements a parser for
+        the useful subset of the Wavefront OBJ mesh format.
       </p>
     </subsection>
     <subsection name="Features">
       <ul>
+        <li>Well tested (99% automated test coverage).</li>
         <li>ISC license.</li>
       </ul>
     </subsection>

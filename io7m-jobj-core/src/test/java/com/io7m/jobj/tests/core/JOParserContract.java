@@ -297,14 +297,14 @@ public abstract class JOParserContract
           case 1:
             Assert.assertEquals(1L, (long) index);
             Assert.assertEquals(2L, (long) v);
-            Assert.assertEquals(1L, (long) vt);
-            Assert.assertEquals(2L, (long) vn);
+            Assert.assertEquals(2L, (long) vt);
+            Assert.assertEquals(1L, (long) vn);
             break;
           case 2:
             Assert.assertEquals(1L, (long) index);
             Assert.assertEquals(3L, (long) v);
-            Assert.assertEquals(1L, (long) vt);
-            Assert.assertEquals(3L, (long) vn);
+            Assert.assertEquals(3L, (long) vt);
+            Assert.assertEquals(1L, (long) vn);
             break;
         }
 
@@ -980,6 +980,686 @@ public abstract class JOParserContract
     };
 
     final JOParserType p = this.getParser("f_v_vt_vn_bad2.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_VT_VN_MissingV()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_V, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_vt_vn_missing_v.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_VT_VN_MissingVT()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_VT, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_vt_vn_missing_vt.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_VT_VN_MissingVN()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_VN, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_vt_vn_missing_vn.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_VT_MissingV()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_V, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_vt_missing_v.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_VT_MissingVT()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_VT, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_vt_missing_vt.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_MissingV()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_V, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_missing_v.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_VN_MissingV()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_V, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_vn_missing_v.obj", ls);
+    p.run();
+
+    Assert.assertTrue(eof.get());
+    Assert.assertTrue(error_called.get());
+  }
+
+  @Test public final void testF_V_VN_MissingVN()
+    throws Exception
+  {
+    final AtomicBoolean eof = new AtomicBoolean(false);
+    final AtomicBoolean error_called = new AtomicBoolean(false);
+
+    final UnreachableListener ls = new UnreachableListener()
+    {
+      @Override public void onLine(
+        final LexicalPositionType<Path> lex,
+        final String line)
+      {
+
+      }
+
+      @Override public void onCommandV(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z,
+        final double w)
+      {
+
+      }
+
+      @Override public void onCommandVN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandVT(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final double x,
+        final double y,
+        final double z)
+      {
+
+      }
+
+      @Override public void onCommandFStarted(
+        final LexicalPositionType<Path> p,
+        final int index)
+      {
+
+      }
+
+      @Override public void onCommandFVertexV_VT_VN(
+        final LexicalPositionType<Path> p,
+        final int index,
+        final int v,
+        final int vt,
+        final int vn)
+      {
+
+      }
+
+      @Override public void onError(
+        final LexicalPositionType<Path> lex,
+        final JOParserErrorCode e,
+        final String message)
+      {
+        Assert.assertEquals(JOParserErrorCode.JOP_ERROR_NONEXISTENT_VN, e);
+        error_called.set(true);
+      }
+
+      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      {
+        eof.set(true);
+      }
+    };
+
+    final JOParserType p = this.getParser("f_v_vn_missing_vn.obj", ls);
     p.run();
 
     Assert.assertTrue(eof.get());

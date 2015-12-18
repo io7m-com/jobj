@@ -44,6 +44,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final JOParserErrorCode e,
     final String message)
   {
+    System.err.println(message);
     throw new UnreachableCodeException();
   }
 

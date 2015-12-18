@@ -18,6 +18,7 @@
     <module>io7m-jobj-checkstyle</module>
     <module>io7m-jobj-core</module>
     <module>io7m-jobj-documentation</module>
+    <module>io7m-jobj-tools</module>
   </modules>
 
   <properties>
@@ -93,6 +94,11 @@
         <version>0.1.1</version>
       </dependency>
 
+      <dependency>
+        <groupId>args4j</groupId>
+        <artifactId>args4j</artifactId>
+        <version>2.32</version>
+      </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-classic</artifactId>
@@ -190,6 +196,11 @@
           <configuration>
             <redirectTestOutputToFile>true</redirectTestOutputToFile>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>2.4.1</version>
         </plugin>
 
         <!-- Submodule checkstyle configuration. -->

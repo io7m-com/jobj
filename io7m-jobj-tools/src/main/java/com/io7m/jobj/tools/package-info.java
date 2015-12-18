@@ -14,47 +14,9 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.jobj.core;
-
 /**
- * Parser error codes.
+ * Command line tools.
  */
 
-public enum JOParserErrorCode
-{
-  /**
-   * Incorrect syntax was used for a particular command.
-   */
+@com.io7m.jnull.NonNullByDefault package com.io7m.jobj.tools;
 
-  JOP_ERROR_BAD_COMMAND_SYNTAX,
-
-  /**
-   * Bad syntax was specified for a vertex.
-   */
-
-  JOP_ERROR_BAD_VERTEX_SYNTAX,
-
-  /**
-   * An unrecognized command was specified.
-   */
-
-  JOP_ERROR_UNRECOGNIZED_COMMAND,
-
-  /**
-   * A reference was made to a nonexistent {@code v} element.
-   */
-
-  JOP_ERROR_NONEXISTENT_V,
-
-  /**
-   * A reference was made to a nonexistent {@code vt} element.
-   */
-
-  JOP_ERROR_NONEXISTENT_VT,
-
-  /**
-   * A reference was made to a nonexistent {@code vn} element.
-   */
-
-  JOP_ERROR_NONEXISTENT_VN
-}

@@ -71,10 +71,10 @@ public final class JOParser implements JOParserType
   private final BufferedReader                   reader;
   private final JOParserEventListenerType        listener;
   private final MutableLexicalPositionType<Path> lex;
-  private       int                              n_current;
-  private       int                              t_current;
-  private       int                              v_current;
-  private       int                              f_current;
+  private       int                              n_next;
+  private       int                              t_next;
+  private       int                              v_next;
+  private       int                              f_next;
 
   private JOParser(
     final Optional<Path> in_path,
@@ -86,10 +86,10 @@ public final class JOParser implements JOParserType
     this.lex.setFile(in_path);
     this.listener = NullCheck.notNull(in_listener);
 
-    this.v_current = 1;
-    this.n_current = 1;
-    this.t_current = 1;
-    this.f_current = 1;
+    this.v_next = 1;
+    this.n_next = 1;
+    this.t_next = 1;
+    this.f_next = 1;
   }
 
   /**
@@ -176,7 +176,7 @@ public final class JOParser implements JOParserType
         slash = true;
         buffer.append(c_line.substring(0, c_line.length() - 1));
         this.lex.setLine(this.lex.getLine() + 1);
-        this.lex.setColumn(0);
+        this.lex.setColumn(1);
         continue;
       }
 
@@ -217,7 +217,7 @@ public final class JOParser implements JOParserType
           this.listener.onComment(this.lex, c_comment);
         }
         this.lex.setLine(this.lex.getLine() + 1);
-        this.lex.setColumn(0);
+        this.lex.setColumn(1);
       }
     } catch (final IOException e) {
       this.listener.onFatalError(this.lex, Optional.of(e), e.getMessage());
@@ -275,7 +275,7 @@ public final class JOParser implements JOParserType
   {
     try {
       if (tokens.size() >= 4) {
-        this.listener.onCommandFStarted(this.lex, this.f_current);
+        this.listener.onCommandFStarted(this.lex, this.f_next);
 
         final FaceType ft;
 
@@ -295,39 +295,45 @@ public final class JOParser implements JOParserType
           return;
         }
 
-        try {
-          for (int index = 1; index < tokens.size(); ++index) {
+        boolean ok = true;
+        for (int index = 1; index < tokens.size(); ++index) {
+          try {
             final Token t = tokens.get(index);
+            this.lex.setColumn(t.position + 1);
             switch (ft) {
               case FACE_V_VT_VN:
-                this.onCommandF_V_VT_VN(t);
+                ok = ok & this.onCommandF_V_VT_VN(t);
                 break;
               case FACE_V_VT:
-                this.onCommandF_V_VT(t);
+                ok = ok & this.onCommandF_V_VT(t);
                 break;
               case FACE_V_VN:
-                this.onCommandF_V_VN(t);
+                ok = ok & this.onCommandF_V_VN(t);
                 break;
               case FACE_V:
-                this.onCommandF_V(t);
+                ok = ok & this.onCommandF_V(t);
                 break;
             }
+          } catch (final ParseException e) {
+            ok = false;
+            final StringBuilder sb = new StringBuilder(128);
+            sb.append("Syntax:\n");
+            sb.append("  <integer>/<integer>/<integer>\n");
+            sb.append("| <integer>/<integer>/\n");
+            sb.append("| <integer>//<integer>\n");
+            sb.append("| <integer>//\n");
+            this.listener.onError(
+              this.lex,
+              JOParserErrorCode.JOP_ERROR_BAD_VERTEX_SYNTAX,
+              sb.toString());
           }
-        } catch (final ParseException e) {
-          final StringBuilder sb = new StringBuilder(128);
-          sb.append("Syntax:\n");
-          sb.append("  <integer>/<integer>/<integer>\n");
-          sb.append("| <integer>/<integer>/\n");
-          sb.append("| <integer>//<integer>\n");
-          sb.append("| <integer>//\n");
-          this.listener.onError(
-            this.lex,
-            JOParserErrorCode.JOP_ERROR_BAD_VERTEX_SYNTAX,
-            sb.toString());
+        }
+
+        if (!ok) {
           return;
         }
 
-        this.listener.onCommandFFinished(this.lex, this.f_current);
+        this.listener.onCommandFFinished(this.lex, this.f_next);
         return;
       }
 
@@ -337,27 +343,41 @@ public final class JOParser implements JOParserType
         "Syntax: 'f' <vertex> <vertex> <vertex> [<vertex> ...]");
 
     } finally {
-      ++this.f_current;
+      ++this.f_next;
     }
   }
 
-  private void onCommandF_V(final Token t)
+  private boolean onCommandF_V(final Token t)
     throws ParseException
   {
     final Matcher m = JOParser.P_FACE_V.matcher(t.getText());
     if (m.matches()) {
       final String i0 = m.group(1);
       final int i0_val = Integer.parseInt(i0);
-      this.listener.onCommandFVertexV(
-        this.lex,
-        this.f_current,
-        i0_val);
+
+      boolean ok = true;
+      if (!this.checkV(i0_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_V,
+          Integer.toString(i0_val));
+      }
+
+      if (ok) {
+        this.listener.onCommandFVertexV(
+          this.lex,
+          this.f_next,
+          i0_val);
+      }
+
+      return ok;
     } else {
       throw new ParseException("Invalid vertex syntax", t.getPosition());
     }
   }
 
-  private void onCommandF_V_VN(final Token t)
+  private boolean onCommandF_V_VN(final Token t)
     throws ParseException
   {
     final Matcher m = JOParser.P_FACE_V_VN.matcher(t.getText());
@@ -366,17 +386,40 @@ public final class JOParser implements JOParserType
       final String i1 = m.group(2);
       final int i0_val = Integer.parseInt(i0);
       final int i1_val = Integer.parseInt(i1);
-      this.listener.onCommandFVertexV_VN(
-        this.lex,
-        this.f_current,
-        i0_val,
-        i1_val);
+
+      boolean ok = true;
+      if (!this.checkV(i0_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_V,
+          Integer.toString(i0_val));
+      }
+
+      this.lex.setColumn(this.lex.getColumn() + i0.length() + 1);
+      if (!this.checkVN(i1_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_VN,
+          Integer.toString(i1_val));
+      }
+
+      if (ok) {
+        this.listener.onCommandFVertexV_VN(
+          this.lex,
+          this.f_next,
+          i0_val,
+          i1_val);
+      }
+
+      return ok;
     } else {
       throw new ParseException("Invalid vertex syntax", t.getPosition());
     }
   }
 
-  private void onCommandF_V_VT(final Token t)
+  private boolean onCommandF_V_VT(final Token t)
     throws ParseException
   {
     final Matcher m = JOParser.P_FACE_V_VT.matcher(t.getText());
@@ -387,17 +430,39 @@ public final class JOParser implements JOParserType
       final int i0_val = Integer.parseInt(i0);
       final int i1_val = Integer.parseInt(i1);
 
-      this.listener.onCommandFVertexV_VT(
-        this.lex,
-        this.f_current,
-        i0_val,
-        i1_val);
+      boolean ok = true;
+      if (!this.checkV(i0_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_V,
+          Integer.toString(i0_val));
+      }
+
+      this.lex.setColumn(this.lex.getColumn() + i0.length() + 1);
+      if (!this.checkVT(i1_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_VT,
+          Integer.toString(i1_val));
+      }
+
+      if (ok) {
+        this.listener.onCommandFVertexV_VT(
+          this.lex,
+          this.f_next,
+          i0_val,
+          i1_val);
+      }
+
+      return ok;
     } else {
       throw new ParseException("Invalid vertex syntax", t.getPosition());
     }
   }
 
-  private void onCommandF_V_VT_VN(final Token t)
+  private boolean onCommandF_V_VT_VN(final Token t)
     throws ParseException
   {
     final Matcher m = JOParser.P_FACE_V_VT_VN.matcher(t.getText());
@@ -410,15 +475,60 @@ public final class JOParser implements JOParserType
       final int i1_val = Integer.parseInt(i1);
       final int i2_val = Integer.parseInt(i2);
 
-      this.listener.onCommandFVertexV_VT_VN(
-        this.lex,
-        this.f_current,
-        i0_val,
-        i1_val,
-        i2_val);
+      boolean ok = true;
+      if (!this.checkV(i0_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_V,
+          Integer.toString(i0_val));
+      }
+
+      this.lex.setColumn(this.lex.getColumn() + i0.length() + 1);
+      if (!this.checkVT(i1_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_VT,
+          Integer.toString(i1_val));
+      }
+
+      this.lex.setColumn(this.lex.getColumn() + i1.length() + 1);
+      if (!this.checkVN(i2_val)) {
+        ok = false;
+        this.listener.onError(
+          this.lex,
+          JOParserErrorCode.JOP_ERROR_NONEXISTENT_VN,
+          Integer.toString(i2_val));
+      }
+
+      if (ok) {
+        this.listener.onCommandFVertexV_VT_VN(
+          this.lex,
+          this.f_next,
+          i0_val,
+          i1_val,
+          i2_val);
+      }
+      return ok;
     } else {
       throw new ParseException("Invalid vertex syntax", t.getPosition());
     }
+  }
+
+  private boolean checkVN(final int vn)
+  {
+    return vn > 0 && vn < this.n_next;
+  }
+
+  private boolean checkVT(final int vt)
+  {
+    return vt > 0 && vt < this.t_next;
+  }
+
+  private boolean checkV(final int v)
+  {
+    return v > 0 && v < this.v_next;
   }
 
   private void onCommandVT(final List<Token> tokens)
@@ -429,21 +539,21 @@ public final class JOParser implements JOParserType
           final double x = JOParser.getDouble(tokens.get(1));
           final double y = 0.0;
           final double z = 0.0;
-          this.listener.onCommandVT(this.lex, this.t_current, x, y, z);
+          this.listener.onCommandVT(this.lex, this.t_next, x, y, z);
           return;
         }
         case 3: {
           final double x = JOParser.getDouble(tokens.get(1));
           final double y = JOParser.getDouble(tokens.get(2));
           final double z = 0.0;
-          this.listener.onCommandVT(this.lex, this.t_current, x, y, z);
+          this.listener.onCommandVT(this.lex, this.t_next, x, y, z);
           return;
         }
         case 4: {
           final double x = JOParser.getDouble(tokens.get(1));
           final double y = JOParser.getDouble(tokens.get(2));
           final double z = JOParser.getDouble(tokens.get(3));
-          this.listener.onCommandVT(this.lex, this.t_current, x, y, z);
+          this.listener.onCommandVT(this.lex, this.t_next, x, y, z);
           return;
         }
       }
@@ -460,7 +570,7 @@ public final class JOParser implements JOParserType
         JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
         e.getMessage());
     } finally {
-      ++this.t_current;
+      ++this.t_next;
     }
   }
 
@@ -473,7 +583,7 @@ public final class JOParser implements JOParserType
           final double y = JOParser.getDouble(tokens.get(2));
           final double z = JOParser.getDouble(tokens.get(3));
           final double w = 1.0;
-          this.listener.onCommandV(this.lex, this.v_current, x, y, z, w);
+          this.listener.onCommandV(this.lex, this.v_next, x, y, z, w);
           return;
         }
         case 5: {
@@ -481,7 +591,7 @@ public final class JOParser implements JOParserType
           final double y = JOParser.getDouble(tokens.get(2));
           final double z = JOParser.getDouble(tokens.get(3));
           final double w = JOParser.getDouble(tokens.get(4));
-          this.listener.onCommandV(this.lex, this.v_current, x, y, z, w);
+          this.listener.onCommandV(this.lex, this.v_next, x, y, z, w);
           return;
         }
       }
@@ -498,7 +608,7 @@ public final class JOParser implements JOParserType
         JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
         e.getMessage());
     } finally {
-      ++this.v_current;
+      ++this.v_next;
     }
   }
 
@@ -510,7 +620,7 @@ public final class JOParser implements JOParserType
           final double x = JOParser.getDouble(tokens.get(1));
           final double y = JOParser.getDouble(tokens.get(2));
           final double z = JOParser.getDouble(tokens.get(3));
-          this.listener.onCommandVN(this.lex, this.n_current, x, y, z);
+          this.listener.onCommandVN(this.lex, this.n_next, x, y, z);
           return;
         }
       }
@@ -527,7 +637,7 @@ public final class JOParser implements JOParserType
         JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
         e.getMessage());
     } finally {
-      ++this.n_current;
+      ++this.n_next;
     }
   }
 
