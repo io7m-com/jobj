@@ -17,6 +17,7 @@
     </subsection>
     <subsection name="Features">
       <ul>
+        <li>Hand-written event-based recovering parser: Efficiently parse, accumulating errors along the way, without being tied to any particular AST types.</li>
         <li>Well tested (99% automated test coverage).</li>
         <li>ISC license.</li>
       </ul>

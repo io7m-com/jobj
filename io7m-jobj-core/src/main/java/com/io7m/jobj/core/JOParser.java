@@ -249,6 +249,15 @@ public final class JOParser implements JOParserType
         case "o":
           this.onCommandO(tokens);
           return;
+        case "mtllib":
+          this.onCommandMtllib(tokens);
+          return;
+        case "usemtl":
+          this.onCommandUsemtl(tokens);
+          return;
+        case "s":
+          this.onCommandS(tokens);
+          return;
       }
 
       this.listener.onError(
@@ -269,6 +278,58 @@ public final class JOParser implements JOParserType
       this.lex,
       JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
       "Syntax: 'o' <name>");
+  }
+
+  private void onCommandUsemtl(final List<Token> tokens)
+  {
+    if (tokens.size() == 2) {
+      this.listener.onCommandUsemtl(this.lex, tokens.get(1).getText());
+      return;
+    }
+
+    this.listener.onError(
+      this.lex,
+      JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
+      "Syntax: 'usemtl' <name>");
+  }
+
+  private void onCommandMtllib(final List<Token> tokens)
+  {
+    if (tokens.size() == 2) {
+      this.listener.onCommandMtllib(this.lex, tokens.get(1).getText());
+      return;
+    }
+
+    this.listener.onError(
+      this.lex,
+      JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
+      "Syntax: 'mtllib' <name>");
+  }
+
+  private void onCommandS(final List<Token> tokens)
+  {
+    try {
+      if (tokens.size() == 2) {
+        final String text = tokens.get(1).getText();
+
+        int gn = 0;
+        if ("off".equals(text)) {
+          gn = 0;
+        } else {
+          gn = Integer.parseInt(text);
+        }
+
+        this.listener.onCommandS(this.lex, gn);
+        return;
+      }
+    } catch (final NumberFormatException e) {
+      // Ignore, fall through
+    }
+
+    this.listener.onError(
+      this.lex,
+      JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
+      "Syntax: 's' ('off' | <integer>)");
   }
 
   private void onCommandF(final List<Token> tokens)

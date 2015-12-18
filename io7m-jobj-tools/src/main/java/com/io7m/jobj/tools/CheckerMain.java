@@ -73,6 +73,18 @@ public final class CheckerMain
     System.err.println();
     parser.printUsage(System.err);
     System.err.println();
+    System.err.println("Version: io7m-jobj " + CheckerMain.getVersion());
+    System.err.println();
+  }
+
+  private static String getVersion()
+  {
+    final Package p = CheckerMain.class.getPackage();
+    final String v = p.getImplementationVersion();
+    if (v == null) {
+      return "0.0.0";
+    }
+    return v;
   }
 
   private void go(final String[] args)
@@ -211,9 +223,30 @@ public final class CheckerMain
 
     }
 
+    @Override public void onCommandUsemtl(
+      final LexicalPositionType<Path> p,
+      final String name)
+    {
+
+    }
+
+    @Override public void onCommandMtllib(
+      final LexicalPositionType<Path> p,
+      final String name)
+    {
+
+    }
+
     @Override public void onCommandO(
       final LexicalPositionType<Path> p,
       final String name)
+    {
+
+    }
+
+    @Override public void onCommandS(
+      final LexicalPositionType<Path> p,
+      final int group_number)
     {
 
     }
