@@ -36,13 +36,15 @@ public abstract class JOParserContract
     JOParserEventListenerType listener)
     throws FileNotFoundException;
 
-  @Test public final void testEmpty()
+  @Test
+  public final void testEmpty()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -54,21 +56,24 @@ public abstract class JOParserContract
     Assert.assertTrue(eof.get());
   }
 
-  @Test public final void testS_0()
+  @Test
+  public final void testS_0()
     throws Exception
   {
     final AtomicBoolean s_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandS(
+      @Override
+      public void onCommandS(
         final LexicalPositionType<Path> p,
         final int group_number)
       {
@@ -76,7 +81,8 @@ public abstract class JOParserContract
         s_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -89,21 +95,24 @@ public abstract class JOParserContract
     Assert.assertTrue(s_called.get());
   }
 
-  @Test public final void testS_1()
+  @Test
+  public final void testS_1()
     throws Exception
   {
     final AtomicBoolean s_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandS(
+      @Override
+      public void onCommandS(
         final LexicalPositionType<Path> p,
         final int group_number)
       {
@@ -111,7 +120,8 @@ public abstract class JOParserContract
         s_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -124,21 +134,24 @@ public abstract class JOParserContract
     Assert.assertTrue(s_called.get());
   }
 
-  @Test public final void testSBad_0()
+  @Test
+  public final void testSBad_0()
     throws Exception
   {
     final AtomicBoolean error_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -147,7 +160,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -160,21 +174,24 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testSBad_1()
+  @Test
+  public final void testSBad_1()
     throws Exception
   {
     final AtomicBoolean error_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -183,7 +200,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -196,21 +214,24 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testO()
+  @Test
+  public final void testO()
     throws Exception
   {
     final AtomicBoolean o_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandO(
+      @Override
+      public void onCommandO(
         final LexicalPositionType<Path> p,
         final String name)
       {
@@ -218,7 +239,8 @@ public abstract class JOParserContract
         o_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -231,21 +253,24 @@ public abstract class JOParserContract
     Assert.assertTrue(o_called.get());
   }
 
-  @Test public final void testUsemtl()
+  @Test
+  public final void testUsemtl()
     throws Exception
   {
     final AtomicBoolean m_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandUsemtl(
+      @Override
+      public void onCommandUsemtl(
         final LexicalPositionType<Path> p,
         final String name)
       {
@@ -253,7 +278,8 @@ public abstract class JOParserContract
         m_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -266,21 +292,24 @@ public abstract class JOParserContract
     Assert.assertTrue(m_called.get());
   }
 
-  @Test public final void testMtllib()
+  @Test
+  public final void testMtllib()
     throws Exception
   {
     final AtomicBoolean m_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandMtllib(
+      @Override
+      public void onCommandMtllib(
         final LexicalPositionType<Path> p,
         final String name)
       {
@@ -288,7 +317,8 @@ public abstract class JOParserContract
         m_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -301,21 +331,24 @@ public abstract class JOParserContract
     Assert.assertTrue(m_called.get());
   }
 
-  @Test public final void testMtllibBad()
+  @Test
+  public final void testMtllibBad()
     throws Exception
   {
     final AtomicBoolean error_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -324,7 +357,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -337,21 +371,24 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testUsemtlBad()
+  @Test
+  public final void testUsemtlBad()
     throws Exception
   {
     final AtomicBoolean error_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -360,7 +397,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -373,21 +411,24 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testOBad()
+  @Test
+  public final void testOBad()
     throws Exception
   {
     final AtomicBoolean error_called = new AtomicBoolean(false);
     final AtomicBoolean eof = new AtomicBoolean(false);
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -396,7 +437,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -409,7 +451,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testComment()
+  @Test
+  public final void testComment()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -418,25 +461,28 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
 
-      @Override public void onComment(
+      @Override
+      public void onComment(
         final LexicalPositionType<Path> lex,
         final String text)
       {
-        Assert.assertEquals(1L, (long) lex.getLine());
+        Assert.assertEquals(1L, (long) lex.line());
         Assert.assertEquals("# comment", text);
         comment_called.set(true);
       }
 
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
-        Assert.assertEquals(1L, (long) lex.getLine());
+        Assert.assertEquals(1L, (long) lex.line());
         Assert.assertEquals("# comment", line);
         line_called.set(true);
       }
@@ -450,7 +496,8 @@ public abstract class JOParserContract
     Assert.assertTrue(line_called.get());
   }
 
-  @Test public final void testTri()
+  @Test
+  public final void testTri()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -463,12 +510,14 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -476,7 +525,8 @@ public abstract class JOParserContract
         f_count.incrementAndGet();
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -507,7 +557,8 @@ public abstract class JOParserContract
         vt_count.incrementAndGet();
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -542,7 +593,8 @@ public abstract class JOParserContract
         v_count.incrementAndGet();
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -556,7 +608,8 @@ public abstract class JOParserContract
         vn_count.incrementAndGet();
       }
 
-      @Override public void onCommandFFinished(
+      @Override
+      public void onCommandFFinished(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -564,7 +617,8 @@ public abstract class JOParserContract
         f_finished.set(true);
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -595,7 +649,8 @@ public abstract class JOParserContract
         fv_count.incrementAndGet();
       }
 
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
@@ -615,7 +670,8 @@ public abstract class JOParserContract
     Assert.assertTrue(f_finished.get());
   }
 
-  @Test public final void testSlash()
+  @Test
+  public final void testSlash()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -624,12 +680,14 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -645,11 +703,12 @@ public abstract class JOParserContract
         v_called.set(true);
       }
 
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
-        Assert.assertEquals(2L, (long) lex.getLine());
+        Assert.assertEquals(2L, (long) lex.line());
         Assert.assertEquals("v 0.0 0.0 0.0", line);
         line_called.set(true);
       }
@@ -663,7 +722,8 @@ public abstract class JOParserContract
     Assert.assertTrue(v_called.get());
   }
 
-  @Test public final void testSlashCommented()
+  @Test
+  public final void testSlashCommented()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -673,21 +733,24 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
 
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
-        Assert.assertEquals(1L, (long) lex.getLine());
+        Assert.assertEquals(1L, (long) lex.line());
         Assert.assertEquals("v 0.0 0.0 0.0 # \\", line);
         line_called.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -703,11 +766,12 @@ public abstract class JOParserContract
         v_called.set(true);
       }
 
-      @Override public void onComment(
+      @Override
+      public void onComment(
         final LexicalPositionType<Path> lex,
         final String text)
       {
-        Assert.assertEquals(1L, (long) lex.getLine());
+        Assert.assertEquals(1L, (long) lex.line());
         Assert.assertEquals("# \\", text);
         comment_called.set(true);
       }
@@ -722,7 +786,8 @@ public abstract class JOParserContract
     Assert.assertTrue(v_called.get());
   }
 
-  @Test public final void testSlashBad()
+  @Test
+  public final void testSlashBad()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -730,17 +795,19 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
 
-      @Override public void onFatalError(
+      @Override
+      public void onFatalError(
         final LexicalPositionType<Path> lex,
         final Optional<Throwable> e,
         final String message)
       {
-        Assert.assertEquals(2L, (long) lex.getLine());
+        Assert.assertEquals(2L, (long) lex.line());
         Assert.assertEquals(Optional.empty(), e);
         Assert.assertEquals("Unexpected EOF", message);
         error_called.set(true);
@@ -754,7 +821,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testVBad0()
+  @Test
+  public final void testVBad0()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -762,14 +830,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -778,7 +848,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -791,7 +862,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testVBad1()
+  @Test
+  public final void testVBad1()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -799,14 +871,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -815,7 +889,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -828,7 +903,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testVNBad0()
+  @Test
+  public final void testVNBad0()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -836,14 +912,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -852,7 +930,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -865,7 +944,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testVNBad1()
+  @Test
+  public final void testVNBad1()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -873,14 +953,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -889,7 +971,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -902,7 +985,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testVTBad0()
+  @Test
+  public final void testVTBad0()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -910,14 +994,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -926,7 +1012,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -939,7 +1026,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testVTBad1()
+  @Test
+  public final void testVTBad1()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -947,14 +1035,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -963,7 +1053,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -976,7 +1067,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testNonsense()
+  @Test
+  public final void testNonsense()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -984,14 +1076,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1002,7 +1096,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1015,7 +1110,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_VN_Bad0()
+  @Test
+  public final void testF_V_VT_VN_Bad0()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1023,14 +1119,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1041,7 +1139,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1051,7 +1150,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1061,14 +1161,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1078,7 +1180,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1087,7 +1190,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1100,7 +1204,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_VN_Bad1()
+  @Test
+  public final void testF_V_VT_VN_Bad1()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1108,14 +1213,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1126,7 +1233,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1136,7 +1244,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1146,14 +1255,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1163,7 +1274,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1172,7 +1284,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1185,7 +1298,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_VN_Bad2()
+  @Test
+  public final void testF_V_VT_VN_Bad2()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1193,14 +1307,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1211,7 +1327,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1221,7 +1338,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1231,14 +1349,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1248,7 +1368,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1257,7 +1378,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1270,7 +1392,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_VN_MissingV()
+  @Test
+  public final void testF_V_VT_VN_MissingV()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1278,14 +1401,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1296,7 +1421,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1306,7 +1432,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1316,14 +1443,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1333,7 +1462,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1342,7 +1472,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1355,7 +1486,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_VN_MissingVT()
+  @Test
+  public final void testF_V_VT_VN_MissingVT()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1363,14 +1495,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1381,7 +1515,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1391,7 +1526,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1401,14 +1537,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1418,7 +1556,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1427,7 +1566,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1440,7 +1580,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_VN_MissingVN()
+  @Test
+  public final void testF_V_VT_VN_MissingVN()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1448,14 +1589,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1466,7 +1609,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1476,7 +1620,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1486,14 +1631,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1503,7 +1650,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1512,7 +1660,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1525,7 +1674,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_MissingV()
+  @Test
+  public final void testF_V_VT_MissingV()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1533,14 +1683,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1551,7 +1703,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1561,7 +1714,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1571,14 +1725,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1588,7 +1744,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1597,7 +1754,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1610,7 +1768,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_MissingVT()
+  @Test
+  public final void testF_V_VT_MissingVT()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1618,14 +1777,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1636,7 +1797,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1646,7 +1808,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1656,14 +1819,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1673,7 +1838,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1682,7 +1848,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1695,7 +1862,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_MissingV()
+  @Test
+  public final void testF_V_MissingV()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1703,14 +1871,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1721,7 +1891,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1731,7 +1902,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1741,14 +1913,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1758,7 +1932,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1767,7 +1942,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1780,7 +1956,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VN_MissingV()
+  @Test
+  public final void testF_V_VN_MissingV()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1788,14 +1965,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1806,7 +1985,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1816,7 +1996,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1826,14 +2007,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1843,7 +2026,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1852,7 +2036,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1865,7 +2050,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VN_MissingVN()
+  @Test
+  public final void testF_V_VN_MissingVN()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1873,14 +2059,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1891,7 +2079,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1901,7 +2090,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1911,14 +2101,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -1928,7 +2120,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -1937,7 +2130,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -1950,7 +2144,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VT_VN()
+  @Test
+  public final void testF_V_VT_VN()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -1960,14 +2155,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandFFinished(
+      @Override
+      public void onCommandFFinished(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -1975,7 +2172,8 @@ public abstract class JOParserContract
         f_finished.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1986,7 +2184,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -1996,7 +2195,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2006,7 +2206,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2014,7 +2215,8 @@ public abstract class JOParserContract
         f_count.incrementAndGet();
       }
 
-      @Override public void onCommandFVertexV_VT_VN(
+      @Override
+      public void onCommandFVertexV_VT_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -2028,7 +2230,8 @@ public abstract class JOParserContract
         fv_count.incrementAndGet();
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2043,7 +2246,8 @@ public abstract class JOParserContract
     Assert.assertTrue(f_finished.get());
   }
 
-  @Test public final void testF_V_VT()
+  @Test
+  public final void testF_V_VT()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2053,14 +2257,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandFFinished(
+      @Override
+      public void onCommandFFinished(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2068,7 +2274,8 @@ public abstract class JOParserContract
         f_finished.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2079,7 +2286,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2089,7 +2297,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2097,7 +2306,8 @@ public abstract class JOParserContract
         f_count.incrementAndGet();
       }
 
-      @Override public void onCommandFVertexV_VT(
+      @Override
+      public void onCommandFVertexV_VT(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -2109,7 +2319,8 @@ public abstract class JOParserContract
         fv_count.incrementAndGet();
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2124,7 +2335,8 @@ public abstract class JOParserContract
     Assert.assertTrue(f_finished.get());
   }
 
-  @Test public final void testF_V_VT_Bad0()
+  @Test
+  public final void testF_V_VT_Bad0()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2132,14 +2344,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2150,7 +2364,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2160,7 +2375,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2170,14 +2386,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VT(
+      @Override
+      public void onCommandFVertexV_VT(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -2186,7 +2404,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -2195,7 +2414,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2208,7 +2428,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_Bad0()
+  @Test
+  public final void testF_V_Bad0()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2216,14 +2437,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2234,7 +2457,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2244,7 +2468,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2254,14 +2479,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV(
+      @Override
+      public void onCommandFVertexV(
         final LexicalPositionType<Path> p,
         final int index,
         final int v)
@@ -2269,7 +2496,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -2278,7 +2506,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2291,7 +2520,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VN_Bad0()
+  @Test
+  public final void testF_V_VN_Bad0()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2299,14 +2529,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2317,7 +2549,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2327,7 +2560,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVT(
+      @Override
+      public void onCommandVT(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2337,14 +2571,16 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
 
       }
 
-      @Override public void onCommandFVertexV_VN(
+      @Override
+      public void onCommandFVertexV_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -2353,7 +2589,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -2362,7 +2599,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2375,7 +2613,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_V_VN()
+  @Test
+  public final void testF_V_VN()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2385,14 +2624,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandFFinished(
+      @Override
+      public void onCommandFFinished(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2400,7 +2641,8 @@ public abstract class JOParserContract
         f_finished.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2411,7 +2653,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandVN(
+      @Override
+      public void onCommandVN(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2421,7 +2664,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2429,7 +2673,8 @@ public abstract class JOParserContract
         f_count.incrementAndGet();
       }
 
-      @Override public void onCommandFVertexV_VN(
+      @Override
+      public void onCommandFVertexV_VN(
         final LexicalPositionType<Path> p,
         final int index,
         final int v,
@@ -2441,7 +2686,8 @@ public abstract class JOParserContract
         fv_count.incrementAndGet();
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2456,7 +2702,8 @@ public abstract class JOParserContract
     Assert.assertTrue(f_finished.get());
   }
 
-  @Test public final void testF_V()
+  @Test
+  public final void testF_V()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2466,14 +2713,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onCommandFFinished(
+      @Override
+      public void onCommandFFinished(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2481,7 +2730,8 @@ public abstract class JOParserContract
         f_finished.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2492,7 +2742,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2500,7 +2751,8 @@ public abstract class JOParserContract
         f_count.incrementAndGet();
       }
 
-      @Override public void onCommandFVertexV(
+      @Override
+      public void onCommandFVertexV(
         final LexicalPositionType<Path> p,
         final int index,
         final int v)
@@ -2510,7 +2762,8 @@ public abstract class JOParserContract
         fv_count.incrementAndGet();
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2525,7 +2778,8 @@ public abstract class JOParserContract
     Assert.assertTrue(f_finished.get());
   }
 
-  @Test public final void testF_Unknown()
+  @Test
+  public final void testF_Unknown()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2535,14 +2789,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -2553,7 +2809,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2564,7 +2821,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onCommandFStarted(
+      @Override
+      public void onCommandFStarted(
         final LexicalPositionType<Path> p,
         final int index)
       {
@@ -2572,7 +2830,8 @@ public abstract class JOParserContract
         f_count.incrementAndGet();
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }
@@ -2587,7 +2846,8 @@ public abstract class JOParserContract
     Assert.assertTrue(error_called.get());
   }
 
-  @Test public final void testF_TooFew()
+  @Test
+  public final void testF_TooFew()
     throws Exception
   {
     final AtomicBoolean eof = new AtomicBoolean(false);
@@ -2596,14 +2856,16 @@ public abstract class JOParserContract
 
     final UnreachableListener ls = new UnreachableListener()
     {
-      @Override public void onLine(
+      @Override
+      public void onLine(
         final LexicalPositionType<Path> lex,
         final String line)
       {
 
       }
 
-      @Override public void onError(
+      @Override
+      public void onError(
         final LexicalPositionType<Path> lex,
         final JOParserErrorCode e,
         final String message)
@@ -2614,7 +2876,8 @@ public abstract class JOParserContract
         error_called.set(true);
       }
 
-      @Override public void onCommandV(
+      @Override
+      public void onCommandV(
         final LexicalPositionType<Path> p,
         final int index,
         final double x,
@@ -2625,7 +2888,8 @@ public abstract class JOParserContract
 
       }
 
-      @Override public void onEOF(final LexicalPositionType<Path> lex)
+      @Override
+      public void onEOF(final LexicalPositionType<Path> lex)
       {
         eof.set(true);
       }

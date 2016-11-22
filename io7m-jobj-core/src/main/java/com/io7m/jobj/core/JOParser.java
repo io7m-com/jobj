@@ -16,9 +16,8 @@
 
 package com.io7m.jobj.core;
 
-import com.io7m.jlexing.core.ImmutableLexicalPosition;
-import com.io7m.jlexing.core.MutableLexicalPosition;
-import com.io7m.jlexing.core.MutableLexicalPositionType;
+import com.io7m.jlexing.core.LexicalPosition;
+import com.io7m.jlexing.core.LexicalPositionMutable;
 import com.io7m.jnull.NullCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +40,7 @@ import java.util.regex.Pattern;
 
 public final class JOParser implements JOParserType
 {
-  private static final Logger  LOG;
+  private static final Logger LOG;
   private static final Pattern SPACE;
   private static final Pattern ALPHA;
   private static final Pattern P_FACE_V_VT_VN;
@@ -68,13 +67,13 @@ public final class JOParser implements JOParserType
       Pattern.UNICODE_CHARACTER_CLASS);
   }
 
-  private final BufferedReader                   reader;
-  private final JOParserEventListenerType        listener;
-  private final MutableLexicalPositionType<Path> lex;
-  private       int                              n_next;
-  private       int                              t_next;
-  private       int                              v_next;
-  private       int                              f_next;
+  private final BufferedReader reader;
+  private final JOParserEventListenerType listener;
+  private final LexicalPositionMutable<Path> lex;
+  private int n_next;
+  private int t_next;
+  private int v_next;
+  private int f_next;
 
   private JOParser(
     final Optional<Path> in_path,
@@ -82,7 +81,7 @@ public final class JOParser implements JOParserType
     final JOParserEventListenerType in_listener)
   {
     this.reader = NullCheck.notNull(in_reader);
-    this.lex = MutableLexicalPosition.newPosition(1, 0);
+    this.lex = LexicalPositionMutable.create(1, 0, in_path);
     this.lex.setFile(in_path);
     this.listener = NullCheck.notNull(in_listener);
 
@@ -175,7 +174,7 @@ public final class JOParser implements JOParserType
       if (c_line.endsWith("\\") && !c_line.contains("#")) {
         slash = true;
         buffer.append(c_line.substring(0, c_line.length() - 1));
-        this.lex.setLine(this.lex.getLine() + 1);
+        this.lex.setLine(this.lex.line() + 1);
         this.lex.setColumn(1);
         continue;
       }
@@ -185,7 +184,8 @@ public final class JOParser implements JOParserType
     }
   }
 
-  @Override public void run()
+  @Override
+  public void run()
   {
     try {
       while (true) {
@@ -197,7 +197,7 @@ public final class JOParser implements JOParserType
         final String c_trim = c_line.trim();
         JOParser.LOG.trace(
           "[{}]: {}",
-          Integer.valueOf(this.lex.getLine()), c_trim);
+          Integer.valueOf(this.lex.line()), c_trim);
         this.listener.onLine(this.lex, c_trim);
 
         final String c_actual;
@@ -216,7 +216,7 @@ public final class JOParser implements JOParserType
         if (c_comment != null) {
           this.listener.onComment(this.lex, c_comment);
         }
-        this.lex.setLine(this.lex.getLine() + 1);
+        this.lex.setLine(this.lex.line() + 1);
         this.lex.setColumn(1);
       }
     } catch (final IOException e) {
@@ -232,7 +232,7 @@ public final class JOParser implements JOParserType
 
       JOParser.LOG.trace(
         "[{}]: command: {}",
-        Integer.valueOf(this.lex.getLine()), cmd.getText());
+        Integer.valueOf(this.lex.line()), cmd.getText());
       switch (cmd.getText()) {
         case "v":
           this.onCommandV(tokens);
@@ -457,7 +457,7 @@ public final class JOParser implements JOParserType
           Integer.toString(i0_val));
       }
 
-      this.lex.setColumn(this.lex.getColumn() + i0.length() + 1);
+      this.lex.setColumn(this.lex.column() + i0.length() + 1);
       if (!this.checkVN(i1_val)) {
         ok = false;
         this.listener.onError(
@@ -500,7 +500,7 @@ public final class JOParser implements JOParserType
           Integer.toString(i0_val));
       }
 
-      this.lex.setColumn(this.lex.getColumn() + i0.length() + 1);
+      this.lex.setColumn(this.lex.column() + i0.length() + 1);
       if (!this.checkVT(i1_val)) {
         ok = false;
         this.listener.onError(
@@ -545,7 +545,7 @@ public final class JOParser implements JOParserType
           Integer.toString(i0_val));
       }
 
-      this.lex.setColumn(this.lex.getColumn() + i0.length() + 1);
+      this.lex.setColumn(this.lex.column() + i0.length() + 1);
       if (!this.checkVT(i1_val)) {
         ok = false;
         this.listener.onError(
@@ -554,7 +554,7 @@ public final class JOParser implements JOParserType
           Integer.toString(i1_val));
       }
 
-      this.lex.setColumn(this.lex.getColumn() + i1.length() + 1);
+      this.lex.setColumn(this.lex.column() + i1.length() + 1);
       if (!this.checkVN(i2_val)) {
         ok = false;
         this.listener.onError(
@@ -626,8 +626,10 @@ public final class JOParser implements JOParserType
 
     } catch (final ParseException e) {
       this.listener.onError(
-        ImmutableLexicalPosition.newPosition(
-          this.lex.getLine(), e.getErrorOffset()),
+        LexicalPosition.of(
+          this.lex.line(),
+          e.getErrorOffset(),
+          this.lex.file()),
         JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
         e.getMessage());
     } finally {
@@ -664,8 +666,10 @@ public final class JOParser implements JOParserType
 
     } catch (final ParseException e) {
       this.listener.onError(
-        ImmutableLexicalPosition.newPosition(
-          this.lex.getLine(), e.getErrorOffset()),
+        LexicalPosition.of(
+          this.lex.line(),
+          e.getErrorOffset(),
+          this.lex.file()),
         JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
         e.getMessage());
     } finally {
@@ -693,8 +697,10 @@ public final class JOParser implements JOParserType
 
     } catch (final ParseException e) {
       this.listener.onError(
-        ImmutableLexicalPosition.newPosition(
-          this.lex.getLine(), e.getErrorOffset()),
+        LexicalPosition.of(
+          this.lex.line(),
+          e.getErrorOffset(),
+          this.lex.file()),
         JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
         e.getMessage());
     } finally {
@@ -713,7 +719,7 @@ public final class JOParser implements JOParserType
   private static final class Token
   {
     private final String text;
-    private final int    position;
+    private final int position;
 
     Token(
       final int in_position,
