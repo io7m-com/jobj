@@ -131,7 +131,7 @@ public final class CheckerMain
   private static final class Listener implements JOParserEventListenerType
   {
     private final Map<Integer, String> lines;
-    private       int                  error_count;
+    private int error_count;
 
     Listener()
     {
@@ -161,7 +161,8 @@ public final class CheckerMain
       }
     }
 
-    @Override public void onFatalError(
+    @Override
+    public void onFatalError(
       final LexicalPositionType<Path> p,
       final Optional<Throwable> e,
       final String message)
@@ -169,7 +170,8 @@ public final class CheckerMain
 
     }
 
-    @Override public void onError(
+    @Override
+    public void onError(
       final LexicalPositionType<Path> p,
       final JOParserErrorCode e,
       final String message)
@@ -204,54 +206,62 @@ public final class CheckerMain
       }
     }
 
-    @Override public void onLine(
+    @Override
+    public void onLine(
       final LexicalPositionType<Path> p,
       final String line)
     {
       this.lines.put(Integer.valueOf(p.getLine()), line);
     }
 
-    @Override public void onEOF(final LexicalPositionType<Path> p)
+    @Override
+    public void onEOF(final LexicalPositionType<Path> p)
     {
 
     }
 
-    @Override public void onComment(
+    @Override
+    public void onComment(
       final LexicalPositionType<Path> p,
       final String text)
     {
 
     }
 
-    @Override public void onCommandUsemtl(
+    @Override
+    public void onCommandUsemtl(
       final LexicalPositionType<Path> p,
       final String name)
     {
 
     }
 
-    @Override public void onCommandMtllib(
+    @Override
+    public void onCommandMtllib(
       final LexicalPositionType<Path> p,
       final String name)
     {
 
     }
 
-    @Override public void onCommandO(
+    @Override
+    public void onCommandO(
       final LexicalPositionType<Path> p,
       final String name)
     {
 
     }
 
-    @Override public void onCommandS(
+    @Override
+    public void onCommandS(
       final LexicalPositionType<Path> p,
       final int group_number)
     {
 
     }
 
-    @Override public void onCommandV(
+    @Override
+    public void onCommandV(
       final LexicalPositionType<Path> p,
       final int index,
       final double x,
@@ -262,7 +272,8 @@ public final class CheckerMain
 
     }
 
-    @Override public void onCommandVN(
+    @Override
+    public void onCommandVN(
       final LexicalPositionType<Path> p,
       final int index,
       final double x,
@@ -272,7 +283,8 @@ public final class CheckerMain
 
     }
 
-    @Override public void onCommandVT(
+    @Override
+    public void onCommandVT(
       final LexicalPositionType<Path> p,
       final int index,
       final double x,
@@ -282,7 +294,8 @@ public final class CheckerMain
 
     }
 
-    @Override public void onCommandFVertexV_VT_VN(
+    @Override
+    public void onCommandFVertexV_VT_VN(
       final LexicalPositionType<Path> p,
       final int index,
       final int v,
@@ -292,7 +305,8 @@ public final class CheckerMain
 
     }
 
-    @Override public void onCommandFVertexV_VT(
+    @Override
+    public void onCommandFVertexV_VT(
       final LexicalPositionType<Path> p,
       final int index,
       final int v,
@@ -301,7 +315,8 @@ public final class CheckerMain
 
     }
 
-    @Override public void onCommandFVertexV_VN(
+    @Override
+    public void onCommandFVertexV_VN(
       final LexicalPositionType<Path> p,
       final int index,
       final int v,
@@ -310,7 +325,8 @@ public final class CheckerMain
 
     }
 
-    @Override public void onCommandFVertexV(
+    @Override
+    public void onCommandFVertexV(
       final LexicalPositionType<Path> p,
       final int index,
       final int v)
@@ -318,14 +334,16 @@ public final class CheckerMain
 
     }
 
-    @Override public void onCommandFStarted(
+    @Override
+    public void onCommandFStarted(
       final LexicalPositionType<Path> p,
       final int index)
     {
 
     }
 
-    @Override public void onCommandFFinished(
+    @Override
+    public void onCommandFFinished(
       final LexicalPositionType<Path> p,
       final int index)
     {
