@@ -143,18 +143,18 @@ public final class CheckerMain
       final LexicalPositionType<Path> p,
       final String message)
     {
-      final String name = p.getFile().map(q -> q.toString() + ":").orElse("");
+      final String name = p.file().map(q -> q.toString() + ":").orElse("");
       System.err.printf(
         "error: %s%d:%d: %s\n",
         name,
-        Integer.valueOf(p.getLine()),
-        Integer.valueOf(p.getColumn()),
+        Integer.valueOf(p.line()),
+        Integer.valueOf(p.column()),
         message);
 
-      final String line = this.lines.get(Integer.valueOf(p.getLine()));
+      final String line = this.lines.get(Integer.valueOf(p.line()));
       if (line != null) {
         System.err.println(line);
-        for (int index = 1; index < p.getColumn(); ++index) {
+        for (int index = 1; index < p.column(); ++index) {
           System.err.print(" ");
         }
         System.err.println("^");
@@ -211,7 +211,7 @@ public final class CheckerMain
       final LexicalPositionType<Path> p,
       final String line)
     {
-      this.lines.put(Integer.valueOf(p.getLine()), line);
+      this.lines.put(Integer.valueOf(p.line()), line);
     }
 
     @Override
