@@ -19,7 +19,7 @@
 <s:document
   xmlns:s="http://schemas.io7m.com/structural/2.1.0"
   xmlns:xi="http://www.w3.org/2001/XInclude">
-  <s:document-title>io7m-jobj 0.2.0 Documentation</s:document-title>
+  <s:document-title>com.io7m.jobj 0.2.1 Documentation</s:document-title>
   <s:document-style>documentation.css</s:document-style>
   <s:document-contents/>
 
@@ -31,7 +31,7 @@
       <s:subsection>
         <s:subsection-title>Overview</s:subsection-title>
         <s:paragraph>
-          The <s:term s:type="package">io7m-jobj</s:term> package
+          The <s:term s:type="package">com.io7m.jobj</s:term> package
           implements a parser for a useful subset of the Wavefront OBJ file
           format.
         </s:paragraph>
@@ -55,15 +55,15 @@
         <s:subsection-title>Maven</s:subsection-title>
         <s:paragraph>
           Regular releases are made to the
-          <s:link-external s:target="http://search.maven.org/#search%7Cga%7C1%7Cio7m-jobj">Central Repository</s:link-external>,
-          so it's possible to use the <s:term s:type="package">io7m-jobj</s:term>
+          <s:link-external s:target="http://search.maven.org/#search%7Cga%7C1%7Ccom.io7m.jobj">Central Repository</s:link-external>,
+          so it's possible to use the <s:term s:type="package">com.io7m.jobj</s:term>
           package in your projects with the following Maven dependency:
         </s:paragraph>
         <s:paragraph>
           <s:verbatim s:type="example"><![CDATA[<dependency>
   <groupId>com.io7m.jobj</groupId>
-  <artifactId>io7m-jobj-core</artifactId>
-  <version>0.2.0</version>
+  <artifactId>com.io7m.jobj-core</artifactId>
+  <version>0.2.1</version>
 </dependency>]]></s:verbatim>
         </s:paragraph>
         <s:paragraph>
@@ -89,7 +89,7 @@
     <s:section>
       <s:section-title>License</s:section-title>
       <s:paragraph>
-        All files distributed with the <s:term s:type="package">io7m-jobj</s:term>
+        All files distributed with the <s:term s:type="package">com.io7m.jobj</s:term>
         package are placed under the following license:
         <s:verbatim s:type="license"><![CDATA[Copyright © 2015 <code@io7m.com> http://io7m.com
 
