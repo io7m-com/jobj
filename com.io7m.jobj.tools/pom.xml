@@ -7,13 +7,13 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.io7m.jobj</groupId>
-    <artifactId>io7m-jobj</artifactId>
+    <artifactId>com.io7m.jobj</artifactId>
     <version>0.2.0</version>
   </parent>
-  <artifactId>io7m-jobj-tools</artifactId>
+  <artifactId>com.io7m.jobj.tools</artifactId>
 
   <packaging>jar</packaging>
-  <name>io7m-jobj-tools</name>
+  <name>com.io7m.jobj.tools</name>
   <description>Wavefront OBJ reader/writer (Command line tools)</description>
   <url>http://io7m.github.io/jobj/</url>
 
@@ -26,17 +26,17 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>io7m-jobj-core</artifactId>
+      <artifactId>com.io7m.jobj.core</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.io7m.jnull</groupId>
-      <artifactId>io7m-jnull-core</artifactId>
+      <artifactId>com.io7m.jnull.core</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.io7m.junreachable</groupId>
-      <artifactId>io7m-junreachable-core</artifactId>
+      <groupId>com.io7m.jlexing</groupId>
+      <artifactId>com.io7m.jlexing.core</artifactId>
     </dependency>
 
     <dependency>
@@ -83,6 +83,18 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <!-- Ignore dependencies that bytecode analysis gets wrong. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <failOnWarning>true</failOnWarning>
+          <ignoredUnusedDeclaredDependencies>
+            <ignoredUnusedDeclaredDependency>ch.qos.logback:logback-classic:*</ignoredUnusedDeclaredDependency>
+          </ignoredUnusedDeclaredDependencies>
+        </configuration>
       </plugin>
     </plugins>
   </build>
