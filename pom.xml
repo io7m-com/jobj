@@ -13,7 +13,7 @@
 
   <groupId>com.io7m.jobj</groupId>
   <artifactId>com.io7m.jobj</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.jobj</name>
@@ -32,7 +32,7 @@
     <siteDocumentationDirectory>com/io7m/jobj/com.io7m.jobj.documentation</siteDocumentationDirectory>
     <io7m.checkstyle.artifact>com.io7m.jobj.checkstyle</io7m.checkstyle.artifact>
     <io7m.checkstyle.path>/com/io7m/jobj/checkstyle/checkstyle.xml</io7m.checkstyle.path>
-    <io7m.api.previousVersion>0.2.0</io7m.api.previousVersion>
+    <io7m.api.previousVersion>0.2.1</io7m.api.previousVersion>
   </properties>
 
   <licenses>
