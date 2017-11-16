@@ -7,3 +7,5 @@ jobj
 [![Codecov](https://img.shields.io/codecov/c/github/io7m/jobj.png?style=flat-square)](https://codecov.io/gh/io7m/jobj)
 
 See https://io7m.github.io/jobj/ for more information.
+
+![jobj](./src/site/resources/jobj.jpg?raw=true)
