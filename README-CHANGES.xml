@@ -17,7 +17,7 @@
         <c:change compatible="false" date="2016-11-22T00:00:00+00:00" summary="Updated to jlexing 0.2.0. This is an API breaking change."/>
       </c:changes>
     </c:release>
-    <c:release date="2017-11-16T22:12:23+00:00" ticket-system="com.github.io7m.jobj" version="0.2.1">
+    <c:release date="2017-11-16T22:12:23+00:00" ticket-system="com.github.io7m.jobj" version="0.3.0">
       <c:changes>
         <c:change date="2017-04-09T00:00:00+00:00" summary="Rename project. Use the new primogenitor POM and 2017 project conventions."/>
         <c:change compatible="false" date="2017-11-16T00:00:00+00:00" summary="All modules are now Java 9 modules. JDK 9 is now required."/>
