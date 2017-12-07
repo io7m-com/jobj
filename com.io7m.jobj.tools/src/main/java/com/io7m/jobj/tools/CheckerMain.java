@@ -73,7 +73,7 @@ public final class CheckerMain
     System.err.println();
     parser.printUsage(System.err);
     System.err.println();
-    System.err.println("Version: io7m-jobj " + CheckerMain.getVersion());
+    System.err.println("Version: io7m-jobj " + getVersion());
     System.err.println();
   }
 
@@ -95,14 +95,14 @@ public final class CheckerMain
       parser.parseArgument(args);
 
       if (this.help) {
-        CheckerMain.showHelp(parser);
+        showHelp(parser);
         System.err.flush();
         System.exit(0);
       }
 
       final Listener ls = new Listener();
 
-      try (final InputStream s = Files.newInputStream(this.file)) {
+      try (InputStream s = Files.newInputStream(this.file)) {
         final JOParserType p =
           JOParser.newParserFromStream(Optional.of(this.file), s, ls);
         p.run();
@@ -122,7 +122,7 @@ public final class CheckerMain
       System.err.flush();
       System.exit(127);
     } catch (final CmdLineException e) {
-      CheckerMain.showHelp(parser);
+      showHelp(parser);
       System.err.flush();
       System.exit(127);
     }

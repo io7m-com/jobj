@@ -15,8 +15,13 @@
  */
 
 /**
- * Documentation.
+ * Wavefront OBJ reader/writer (Core)
  */
 
-package com.io7m.jobj.documentation;
+module com.io7m.jobj.core
+{
+  requires org.slf4j;
+  requires com.io7m.jlexing.core;
 
+  exports com.io7m.jobj.core;
+}

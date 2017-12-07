@@ -15,8 +15,12 @@
  */
 
 /**
- * Documentation.
+ * Wavefront OBJ reader/writer (Documentation)
  */
 
-package com.io7m.jobj.documentation;
+module com.io7m.jobj.documentation
+{
+  requires com.io7m.jobj.core;
 
+  exports com.io7m.jobj.documentation;
+}

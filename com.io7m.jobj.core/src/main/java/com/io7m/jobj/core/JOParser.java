@@ -18,7 +18,6 @@ package com.io7m.jobj.core;
 
 import com.io7m.jlexing.core.LexicalPosition;
 import com.io7m.jlexing.core.LexicalPositionMutable;
-import com.io7m.jnull.NullCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +29,7 @@ import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,10 +80,10 @@ public final class JOParser implements JOParserType
     final BufferedReader in_reader,
     final JOParserEventListenerType in_listener)
   {
-    this.reader = NullCheck.notNull(in_reader);
+    this.reader = Objects.requireNonNull(in_reader, "Reader");
     this.lex = LexicalPositionMutable.create(1, 0, in_path);
     this.lex.setFile(in_path);
-    this.listener = NullCheck.notNull(in_listener);
+    this.listener = Objects.requireNonNull(in_listener, "Listener");
 
     this.v_next = 1;
     this.n_next = 1;
@@ -116,7 +116,7 @@ public final class JOParser implements JOParserType
   {
     final List<Token> tokens = new ArrayList<>(8);
     int index = 0;
-    for (final String t : JOParser.SPACE.split(text)) {
+    for (final String t : SPACE.split(text)) {
       tokens.add(new Token(index, t));
       index += t.length() + 1;
     }
@@ -137,16 +137,16 @@ public final class JOParser implements JOParserType
     throws ParseException
   {
     final String text = token.getText();
-    if (JOParser.P_FACE_V_VT_VN.matcher(text).matches()) {
+    if (P_FACE_V_VT_VN.matcher(text).matches()) {
       return FaceType.FACE_V_VT_VN;
     }
-    if (JOParser.P_FACE_V_VT.matcher(text).matches()) {
+    if (P_FACE_V_VT.matcher(text).matches()) {
       return FaceType.FACE_V_VT;
     }
-    if (JOParser.P_FACE_V_VN.matcher(text).matches()) {
+    if (P_FACE_V_VN.matcher(text).matches()) {
       return FaceType.FACE_V_VN;
     }
-    if (JOParser.P_FACE_V.matcher(text).matches()) {
+    if (P_FACE_V.matcher(text).matches()) {
       return FaceType.FACE_V;
     }
 
@@ -162,7 +162,7 @@ public final class JOParser implements JOParserType
     while (true) {
       final String c_line = this.reader.readLine();
       if (c_line == null) {
-        JOParser.LOG.trace("eof");
+        LOG.trace("eof");
         if (slash) {
           this.listener.onFatalError(
             this.lex, Optional.empty(), "Unexpected EOF");
@@ -195,7 +195,7 @@ public final class JOParser implements JOParserType
         }
 
         final String c_trim = c_line.trim();
-        JOParser.LOG.trace(
+        LOG.trace(
           "[{}]: {}",
           Integer.valueOf(this.lex.line()), c_trim);
         this.listener.onLine(this.lex, c_trim);
@@ -227,10 +227,10 @@ public final class JOParser implements JOParserType
   private void onCommand(final String text)
   {
     if (!text.isEmpty()) {
-      final List<Token> tokens = JOParser.getTokens(text);
+      final List<Token> tokens = getTokens(text);
       final Token cmd = tokens.get(0);
 
-      JOParser.LOG.trace(
+      LOG.trace(
         "[{}]: command: {}",
         Integer.valueOf(this.lex.line()), cmd.getText());
       switch (cmd.getText()) {
@@ -258,12 +258,13 @@ public final class JOParser implements JOParserType
         case "s":
           this.onCommandS(tokens);
           return;
+        default: {
+          this.listener.onError(
+            this.lex,
+            JOParserErrorCode.JOP_ERROR_UNRECOGNIZED_COMMAND,
+            cmd.getText());
+        }
       }
-
-      this.listener.onError(
-        this.lex,
-        JOParserErrorCode.JOP_ERROR_UNRECOGNIZED_COMMAND,
-        cmd.getText());
     }
   }
 
@@ -341,7 +342,7 @@ public final class JOParser implements JOParserType
         final FaceType ft;
 
         try {
-          ft = JOParser.getFaceType(tokens.get(1));
+          ft = getFaceType(tokens.get(1));
         } catch (final ParseException e) {
           final StringBuilder sb = new StringBuilder(128);
           sb.append("Syntax:\n");
@@ -411,7 +412,7 @@ public final class JOParser implements JOParserType
   private boolean onCommandF_V(final Token t)
     throws ParseException
   {
-    final Matcher m = JOParser.P_FACE_V.matcher(t.getText());
+    final Matcher m = P_FACE_V.matcher(t.getText());
     if (m.matches()) {
       final String i0 = m.group(1);
       final int i0_val = Integer.parseInt(i0);
@@ -441,7 +442,7 @@ public final class JOParser implements JOParserType
   private boolean onCommandF_V_VN(final Token t)
     throws ParseException
   {
-    final Matcher m = JOParser.P_FACE_V_VN.matcher(t.getText());
+    final Matcher m = P_FACE_V_VN.matcher(t.getText());
     if (m.matches()) {
       final String i0 = m.group(1);
       final String i1 = m.group(2);
@@ -483,7 +484,7 @@ public final class JOParser implements JOParserType
   private boolean onCommandF_V_VT(final Token t)
     throws ParseException
   {
-    final Matcher m = JOParser.P_FACE_V_VT.matcher(t.getText());
+    final Matcher m = P_FACE_V_VT.matcher(t.getText());
     if (m.matches()) {
       final String i0 = m.group(1);
       final String i1 = m.group(2);
@@ -526,7 +527,7 @@ public final class JOParser implements JOParserType
   private boolean onCommandF_V_VT_VN(final Token t)
     throws ParseException
   {
-    final Matcher m = JOParser.P_FACE_V_VT_VN.matcher(t.getText());
+    final Matcher m = P_FACE_V_VT_VN.matcher(t.getText());
     if (m.matches()) {
       final String i0 = m.group(1);
       final String i1 = m.group(2);
@@ -597,32 +598,33 @@ public final class JOParser implements JOParserType
     try {
       switch (tokens.size()) {
         case 2: {
-          final double x = JOParser.getDouble(tokens.get(1));
+          final double x = getDouble(tokens.get(1));
           final double y = 0.0;
           final double z = 0.0;
           this.listener.onCommandVT(this.lex, this.t_next, x, y, z);
           return;
         }
         case 3: {
-          final double x = JOParser.getDouble(tokens.get(1));
-          final double y = JOParser.getDouble(tokens.get(2));
+          final double x = getDouble(tokens.get(1));
+          final double y = getDouble(tokens.get(2));
           final double z = 0.0;
           this.listener.onCommandVT(this.lex, this.t_next, x, y, z);
           return;
         }
         case 4: {
-          final double x = JOParser.getDouble(tokens.get(1));
-          final double y = JOParser.getDouble(tokens.get(2));
-          final double z = JOParser.getDouble(tokens.get(3));
+          final double x = getDouble(tokens.get(1));
+          final double y = getDouble(tokens.get(2));
+          final double z = getDouble(tokens.get(3));
           this.listener.onCommandVT(this.lex, this.t_next, x, y, z);
           return;
         }
+        default: {
+          this.listener.onError(
+            this.lex,
+            JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
+            "Syntax: 'vt' <float> [<float>] [<float>]");
+        }
       }
-
-      this.listener.onError(
-        this.lex,
-        JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
-        "Syntax: 'vt' <float> [<float>] [<float>]");
 
     } catch (final ParseException e) {
       this.listener.onError(
@@ -642,27 +644,28 @@ public final class JOParser implements JOParserType
     try {
       switch (tokens.size()) {
         case 4: {
-          final double x = JOParser.getDouble(tokens.get(1));
-          final double y = JOParser.getDouble(tokens.get(2));
-          final double z = JOParser.getDouble(tokens.get(3));
+          final double x = getDouble(tokens.get(1));
+          final double y = getDouble(tokens.get(2));
+          final double z = getDouble(tokens.get(3));
           final double w = 1.0;
           this.listener.onCommandV(this.lex, this.v_next, x, y, z, w);
           return;
         }
         case 5: {
-          final double x = JOParser.getDouble(tokens.get(1));
-          final double y = JOParser.getDouble(tokens.get(2));
-          final double z = JOParser.getDouble(tokens.get(3));
-          final double w = JOParser.getDouble(tokens.get(4));
+          final double x = getDouble(tokens.get(1));
+          final double y = getDouble(tokens.get(2));
+          final double z = getDouble(tokens.get(3));
+          final double w = getDouble(tokens.get(4));
           this.listener.onCommandV(this.lex, this.v_next, x, y, z, w);
           return;
         }
+        default: {
+          this.listener.onError(
+            this.lex,
+            JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
+            "Syntax: 'v' <float> <float> <float> [<float>]");
+        }
       }
-
-      this.listener.onError(
-        this.lex,
-        JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
-        "Syntax: 'v' <float> <float> <float> [<float>]");
 
     } catch (final ParseException e) {
       this.listener.onError(
@@ -682,18 +685,19 @@ public final class JOParser implements JOParserType
     try {
       switch (tokens.size()) {
         case 4: {
-          final double x = JOParser.getDouble(tokens.get(1));
-          final double y = JOParser.getDouble(tokens.get(2));
-          final double z = JOParser.getDouble(tokens.get(3));
+          final double x = getDouble(tokens.get(1));
+          final double y = getDouble(tokens.get(2));
+          final double z = getDouble(tokens.get(3));
           this.listener.onCommandVN(this.lex, this.n_next, x, y, z);
           return;
         }
+        default: {
+          this.listener.onError(
+            this.lex,
+            JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
+            "Syntax: 'vn' <float> <float> <float>");
+        }
       }
-
-      this.listener.onError(
-        this.lex,
-        JOParserErrorCode.JOP_ERROR_BAD_COMMAND_SYNTAX,
-        "Syntax: 'vn' <float> <float> <float>");
 
     } catch (final ParseException e) {
       this.listener.onError(

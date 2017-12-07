@@ -8,7 +8,7 @@
   <parent>
     <groupId>com.io7m.jobj</groupId>
     <artifactId>com.io7m.jobj</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
   </parent>
   <artifactId>com.io7m.jobj.core</artifactId>
 
@@ -17,17 +17,7 @@
   <description>Wavefront OBJ reader/writer (Core)</description>
   <url>http://io7m.github.io/jobj/</url>
 
-  <scm>
-    <url>${project.parent.scm.url}</url>
-    <connection>${project.parent.scm.connection}</connection>
-    <developerConnection>${project.parent.scm.developerConnection}</developerConnection>
-  </scm>
-
   <dependencies>
-    <dependency>
-      <groupId>com.io7m.jnull</groupId>
-      <artifactId>com.io7m.jnull.core</artifactId>
-    </dependency>
     <dependency>
       <groupId>com.io7m.junreachable</groupId>
       <artifactId>com.io7m.junreachable.core</artifactId>
@@ -86,6 +76,12 @@
             <ignoredUnusedDeclaredDependency>ch.qos.logback:logback-classic:*</ignoredUnusedDeclaredDependency>
           </ignoredUnusedDeclaredDependencies>
         </configuration>
+      </plugin>
+
+      <!-- Determine test coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
