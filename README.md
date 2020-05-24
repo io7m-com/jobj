@@ -7,6 +7,5 @@ jobj
 [![Codacy grade](https://img.shields.io/codacy/grade/bcc6b7b6878f4c9cb64acc10d7ed96ed.png?style=flat-square)](https://www.codacy.com/app/github_79/jobj)
 [![Codecov](https://img.shields.io/codecov/c/github/io7m/jobj.png?style=flat-square)](https://codecov.io/gh/io7m/jobj)
 
-See https://io7m.github.io/jobj/ for more information.
-
 ![jobj](./src/site/resources/jobj.jpg?raw=true)
+
