@@ -68,8 +68,8 @@
   </distributionManagement>
 
   <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.org/io7m/jobj</url>
+    <system>GitHub Actions</system>
+    <url>https://github.com/jobj/actions</url>
   </ciManagement>
 
   <prerequisites>
