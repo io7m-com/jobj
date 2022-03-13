@@ -15,7 +15,7 @@
   <packaging>jar</packaging>
   <name>com.io7m.jobj.tools</name>
   <description>Wavefront OBJ reader/writer (Command line tools)</description>
-  <url>http://io7m.github.io/jobj/</url>
+  <url>https://io7m.github.io/jobj/</url>
 
   <dependencies>
     <dependency>

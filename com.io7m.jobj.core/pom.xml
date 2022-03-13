@@ -15,13 +15,9 @@
   <packaging>jar</packaging>
   <name>com.io7m.jobj.core</name>
   <description>Wavefront OBJ reader/writer (Core)</description>
-  <url>http://io7m.github.io/jobj/</url>
+  <url>https://io7m.github.io/jobj/</url>
 
   <dependencies>
-    <dependency>
-      <groupId>com.io7m.junreachable</groupId>
-      <artifactId>com.io7m.junreachable.core</artifactId>
-    </dependency>
     <dependency>
       <groupId>com.io7m.jlexing</groupId>
       <artifactId>com.io7m.jlexing.core</artifactId>
