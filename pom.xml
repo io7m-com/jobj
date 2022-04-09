@@ -19,7 +19,7 @@
   <packaging>pom</packaging>
   <name>com.io7m.jobj</name>
   <description>Wavefront OBJ reader/writer</description>
-  <url>https://github.com/io7m/jobj</url>
+  <url>https://www.io7m.com/software/jobj</url>
 
   <modules>
     <module>com.io7m.jobj.core</module>
@@ -124,17 +124,6 @@
   <build>
     <pluginManagement>
       <plugins>
-        <!-- Require JDK >= 11 -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <source>11</source>
-            <target>11</target>
-            <release>11</release>
-          </configuration>
-        </plugin>
-
         <!-- jstructural plugin for generating documentation. -->
         <plugin>
           <groupId>com.io7m.jstructural</groupId>
@@ -154,6 +143,12 @@
     </pluginManagement>
 
     <plugins>
+      <!-- Spot bugs -->
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+      </plugin>
+
       <!-- Generate a site -->
       <plugin>
         <groupId>com.io7m.minisite</groupId>

@@ -20,4 +20,12 @@
     </Or>
   </Match>
 
+  <Match>
+    <!-- Exclude the main program. -->
+    <Or>
+      <Class name="com.io7m.jobj.tools.CheckerMain"/>
+      <Class name="com.io7m.jobj.tools.CheckerMain$Listener"/>
+    </Or>
+  </Match>
+
 </FindBugsFilter>
