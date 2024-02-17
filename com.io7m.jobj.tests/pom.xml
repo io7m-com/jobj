@@ -11,14 +11,26 @@
     <artifactId>com.io7m.jobj</artifactId>
     <version>0.4.0-SNAPSHOT</version>
   </parent>
-  <artifactId>com.io7m.jobj.core</artifactId>
+  <artifactId>com.io7m.jobj.tests</artifactId>
 
   <packaging>jar</packaging>
-  <name>com.io7m.jobj.core</name>
-  <description>Wavefront OBJ reader/writer (Core)</description>
+  <name>com.io7m.jobj.tests</name>
+  <description>Wavefront OBJ reader/writer (Test suite)</description>
   <url>https://www.io7m.com/software/jobj</url>
 
+  <properties>
+    <mdep.analyze.skip>true</mdep.analyze.skip>
+    <checkstyle.skip>true</checkstyle.skip>
+    <spotbugs.skip>true</spotbugs.skip>
+  </properties>
+
   <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>com.io7m.jobj.core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>com.io7m.jlexing</groupId>
       <artifactId>com.io7m.jlexing.core</artifactId>
@@ -26,6 +38,19 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.io7m.junreachable</groupId>
+      <artifactId>com.io7m.junreachable.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
     </dependency>
   </dependencies>
 
@@ -42,6 +67,12 @@
             <ignoredUnusedDeclaredDependency>ch.qos.logback:logback-classic:*</ignoredUnusedDeclaredDependency>
           </ignoredUnusedDeclaredDependencies>
         </configuration>
+      </plugin>
+
+      <!-- Determine test coverage -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

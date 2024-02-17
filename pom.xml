@@ -24,6 +24,7 @@
   <modules>
     <module>com.io7m.jobj.core</module>
     <module>com.io7m.jobj.documentation</module>
+    <module>com.io7m.jobj.tests</module>
     <module>com.io7m.jobj.tools</module>
   </modules>
 
