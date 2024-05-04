@@ -20,6 +20,9 @@
 
 module com.io7m.jobj.core
 {
+  requires org.osgi.annotation.bundle;
+  requires org.osgi.annotation.versioning;
+
   requires org.slf4j;
   requires com.io7m.jlexing.core;
 

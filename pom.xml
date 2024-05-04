@@ -23,7 +23,6 @@
 
   <modules>
     <module>com.io7m.jobj.core</module>
-    <module>com.io7m.jobj.documentation</module>
     <module>com.io7m.jobj.tests</module>
     <module>com.io7m.jobj.tools</module>
   </modules>
@@ -70,6 +69,10 @@
       <id>sonatype-nexus-staging</id>
       <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
+    <snapshotRepository>
+      <id>sonatype-nexus-snapshots</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <ciManagement>
@@ -99,6 +102,17 @@
         <artifactId>com.io7m.primogenitor.support</artifactId>
         <version>8.2.0</version>
       </dependency>
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.annotation.versioning</artifactId>
+        <version>1.1.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.osgi</groupId>
+        <artifactId>org.osgi.annotation.bundle</artifactId>
+        <version>2.0.0</version>
+      </dependency>
+
       <dependency>
         <groupId>args4j</groupId>
         <artifactId>args4j</artifactId>
