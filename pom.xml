@@ -14,7 +14,7 @@
 
   <groupId>com.io7m.jobj</groupId>
   <artifactId>com.io7m.jobj</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <packaging>pom</packaging>
   <name>com.io7m.jobj</name>
