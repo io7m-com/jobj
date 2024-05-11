@@ -1,27 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<c:changelog xmlns:c="urn:com.io7m.changelog:4.0" project="com.io7m.jobj">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<c:changelog project="com.io7m.jobj" xmlns:c="urn:com.io7m.changelog:4.0">
   <c:releases>
-    <c:release date="2015-12-18T00:00:00+00:00" ticket-system="com.github.io7m.jobj" version="0.1.0">
+    <c:release date="2015-12-18T00:00:00+00:00" is-open="false" ticket-system="com.github.io7m.jobj" version="0.1.0">
       <c:changes>
         <c:change date="2015-12-18T00:00:00+00:00" summary="Initial release."/>
       </c:changes>
     </c:release>
-    <c:release date="2016-08-16T00:00:00+00:00" ticket-system="com.github.io7m.jobj" version="0.1.1">
+    <c:release date="2016-08-16T00:00:00+00:00" is-open="false" ticket-system="com.github.io7m.jobj" version="0.1.1">
       <c:changes>
         <c:change date="2016-08-16T00:00:00+00:00" summary="Update Maven dependencies and plugins."/>
         <c:change date="2016-08-16T00:00:00+00:00" summary="The produced package is now an OSGi bundle."/>
       </c:changes>
     </c:release>
-    <c:release date="2016-11-22T00:00:00+00:00" ticket-system="com.github.io7m.jobj" version="0.2.0">
+    <c:release date="2016-11-22T00:00:00+00:00" is-open="false" ticket-system="com.github.io7m.jobj" version="0.2.0">
       <c:changes>
         <c:change compatible="false" date="2016-11-22T00:00:00+00:00" summary="Updated to jlexing 0.2.0. This is an API breaking change."/>
       </c:changes>
     </c:release>
-    <c:release date="2017-11-16T22:12:23+00:00" ticket-system="com.github.io7m.jobj" version="0.3.0">
+    <c:release date="2017-11-16T00:00:00+00:00" is-open="false" ticket-system="com.github.io7m.jobj" version="0.3.0">
       <c:changes>
         <c:change date="2017-04-09T00:00:00+00:00" summary="Rename project. Use the new primogenitor POM and 2017 project conventions."/>
         <c:change compatible="false" date="2017-11-16T00:00:00+00:00" summary="All modules are now Java 9 modules. JDK 9 is now required."/>
-        <c:change compatible="false" date="2017-11-16T22:12:23+00:00" summary="Removed dependency on com.io7m.jnull."/>
+        <c:change compatible="false" date="2017-11-16T00:00:00+00:00" summary="Removed dependency on com.io7m.jnull."/>
+      </c:changes>
+    </c:release>
+    <c:release date="2024-05-11T17:17:02+00:00" is-open="true" ticket-system="com.github.io7m.jobj" version="1.0.0">
+      <c:changes>
+        <c:change date="2024-05-11T17:17:02+00:00" summary="Initial public release."/>
       </c:changes>
     </c:release>
   </c:releases>
