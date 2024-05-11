@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015 <code@io7m.com> http://io7m.com
+ * Copyright © 2015 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -25,6 +25,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -50,8 +52,10 @@ public final class JOParser implements JOParserType
 
   static {
     LOG = LoggerFactory.getLogger(JOParser.class);
-    SPACE = Pattern.compile("\\s+", Pattern.UNICODE_CHARACTER_CLASS);
-    ALPHA = Pattern.compile("\\p{Alpha}+", Pattern.UNICODE_CHARACTER_CLASS);
+    SPACE =
+      Pattern.compile("\\s+", Pattern.UNICODE_CHARACTER_CLASS);
+    ALPHA =
+      Pattern.compile("\\p{Alpha}+", Pattern.UNICODE_CHARACTER_CLASS);
     P_FACE_V_VT_VN =
       Pattern.compile(
         "(\\p{Digit}+)/(\\p{Digit}+)/(\\p{Digit}+)",
@@ -106,10 +110,14 @@ public final class JOParser implements JOParserType
     final InputStream stream,
     final JOParserEventListenerType ls)
   {
-    return new JOParser(
-      in_path,
-      new BufferedReader(new InputStreamReader(stream)),
-      ls);
+    try {
+      return new JOParser(
+        in_path,
+        new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8.name())),
+        ls);
+    } catch (final UnsupportedEncodingException e) {
+      throw new UnsupportedOperationException(e);
+    }
   }
 
   private static List<Token> getTokens(final String text)
@@ -229,11 +237,13 @@ public final class JOParser implements JOParserType
     if (!text.isEmpty()) {
       final List<Token> tokens = getTokens(text);
       final Token cmd = tokens.get(0);
+      final String cmd_text = cmd.getText();
 
       LOG.trace(
         "[{}]: command: {}",
-        Integer.valueOf(this.lex.line()), cmd.getText());
-      switch (cmd.getText()) {
+        Integer.valueOf(this.lex.line()), cmd_text);
+
+      switch (cmd_text) {
         case "v":
           this.onCommandV(tokens);
           return;
@@ -262,7 +272,7 @@ public final class JOParser implements JOParserType
           this.listener.onError(
             this.lex,
             JOParserErrorCode.JOP_ERROR_UNRECOGNIZED_COMMAND,
-            cmd.getText());
+            cmd_text);
         }
       }
     }

@@ -14,17 +14,31 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/**
- * Wavefront OBJ reader/writer (Core)
- */
+package com.io7m.jobj.tests.core;
 
-module com.io7m.jobj.core
+import com.io7m.jobj.core.JOParser;
+import com.io7m.jobj.core.JOParserEventListenerType;
+import com.io7m.jobj.core.JOParserType;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.nio.file.Paths;
+import java.util.Optional;
+
+public final class JOParserTest extends JOParserContract
 {
-  requires org.osgi.annotation.bundle;
-  requires org.osgi.annotation.versioning;
+  @Override protected JOParserType getParser(
+    final String name,
+    final JOParserEventListenerType listener)
+    throws FileNotFoundException
+  {
+    final InputStream stream =
+      JOParserTest.class.getResourceAsStream(name);
+    if (stream == null) {
+      throw new FileNotFoundException(name);
+    }
 
-  requires org.slf4j;
-  requires com.io7m.jlexing.core;
-
-  exports com.io7m.jobj.core;
+    return JOParser.newParserFromStream(
+      Optional.of(Paths.get(name)), stream, listener);
+  }
 }

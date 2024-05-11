@@ -15,16 +15,8 @@
  */
 
 /**
- * Wavefront OBJ reader/writer (Core)
+ * Unit tests for the core.
  */
 
-module com.io7m.jobj.core
-{
-  requires org.osgi.annotation.bundle;
-  requires org.osgi.annotation.versioning;
+package com.io7m.jobj.tests.core;
 
-  requires org.slf4j;
-  requires com.io7m.jlexing.core;
-
-  exports com.io7m.jobj.core;
-}
