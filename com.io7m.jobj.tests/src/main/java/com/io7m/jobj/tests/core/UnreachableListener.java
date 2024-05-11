@@ -19,7 +19,6 @@ package com.io7m.jobj.tests.core;
 import com.io7m.jlexing.core.LexicalPositionType;
 import com.io7m.jobj.core.JOParserErrorCode;
 import com.io7m.jobj.core.JOParserEventListenerType;
-import com.io7m.junreachable.UnreachableCodeException;
 
 import java.nio.file.Path;
 import java.util.Optional;
@@ -36,7 +35,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final Optional<Throwable> e,
     final String message)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onError(
@@ -45,54 +44,54 @@ public class UnreachableListener implements JOParserEventListenerType
     final String message)
   {
     System.err.println(message);
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onLine(
     final LexicalPositionType<Path> lex,
     final String line)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onEOF(final LexicalPositionType<Path> lex)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onComment(
     final LexicalPositionType<Path> lex,
     final String text)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandUsemtl(
     final LexicalPositionType<Path> p,
     final String name)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandMtllib(
     final LexicalPositionType<Path> p,
     final String name)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandO(
     final LexicalPositionType<Path> p,
     final String name)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandS(
     final LexicalPositionType<Path> p,
     final int group_number)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandV(
@@ -103,7 +102,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final double z,
     final double w)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandVN(
@@ -113,7 +112,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final double y,
     final double z)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandVT(
@@ -123,7 +122,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final double y,
     final double z)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandFVertexV_VT_VN(
@@ -133,7 +132,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final int vt,
     final int vn)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandFVertexV_VT(
@@ -142,7 +141,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final int v,
     final int vt)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandFVertexV_VN(
@@ -151,7 +150,7 @@ public class UnreachableListener implements JOParserEventListenerType
     final int v,
     final int vn)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandFVertexV(
@@ -159,20 +158,20 @@ public class UnreachableListener implements JOParserEventListenerType
     final int index,
     final int v)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandFStarted(
     final LexicalPositionType<Path> p,
     final int index)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 
   @Override public void onCommandFFinished(
     final LexicalPositionType<Path> p,
     final int index)
   {
-    throw new UnreachableCodeException();
+    throw new IllegalStateException();
   }
 }
