@@ -7,6 +7,12 @@
     <Bug pattern="CBX_CUSTOM_BUILT_XML"/>
   </Match>
 
+  <!-- No thread safety is expected. -->
+  <Match>
+    <Class name="com.io7m.jobj.core.JOParser"/>
+    <Bug pattern="AT_NONATOMIC_OPERATIONS_ON_SHARED_VARIABLE"/>
+  </Match>
+
   <Match>
     <Or>
       <Bug pattern="AI_ANNOTATION_ISSUES_NEEDS_NULLABLE"/>

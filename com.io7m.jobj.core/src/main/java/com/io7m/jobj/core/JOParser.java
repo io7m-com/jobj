@@ -724,10 +724,12 @@ public final class JOParser implements JOParserType
 
   private enum FaceType
   {
+    // CHECKSTYLE:OFF
     FACE_V_VT_VN,
     FACE_V_VT,
     FACE_V_VN,
     FACE_V
+    // CHECKSTYLE:ON
   }
 
   private static final class Token
